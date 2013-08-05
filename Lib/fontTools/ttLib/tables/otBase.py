@@ -30,12 +30,20 @@ class BaseTTXConverter(DefaultTable):
 	"""
 	
 	def decompile(self, data, font):
+
 		import otTables
 		cachingStats = None
 		reader = OTTableReader(data, self.tableTag, cachingStats=cachingStats)
 		tableClass = getattr(otTables, self.tableTag)
 		self.table = tableClass()
+		
+		import sys, time
+		prev_time = time.time()
 		self.table.decompile(reader, font)
+
+		decomp_time = time.time() - prev_time
+		print self.tableTag, "DECOMP TIME:", decomp_time
+		
 		if 0:
 			stats = [(v, k) for k, v in cachingStats.items()]
 			stats.sort()
@@ -494,11 +502,11 @@ class TableStack:
 	def __init__(self):
 		self.stack = []
 	def push(self, table):
-		self.stack.insert(0, table)
+		self.stack.append(table)
 	def pop(self):
-		self.stack.pop(0)
+		self.stack.pop()
 	def getTop(self):
-		return self.stack[0]
+		return self.stack[-1]
 	def getValue(self, name):
 		return self.__findTable(name)[name]
 	def storeValue(self, name, value):
