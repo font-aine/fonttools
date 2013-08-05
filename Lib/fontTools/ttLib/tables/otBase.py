@@ -30,19 +30,12 @@ class BaseTTXConverter(DefaultTable):
 	"""
 	
 	def decompile(self, data, font):
-
 		import otTables
 		cachingStats = None
 		reader = OTTableReader(data, self.tableTag, cachingStats=cachingStats)
 		tableClass = getattr(otTables, self.tableTag)
 		self.table = tableClass()
-		
-		import sys, time
-		prev_time = time.time()
 		self.table.decompile(reader, font)
-
-		decomp_time = time.time() - prev_time
-		print self.tableTag, "DECOMP TIME:", decomp_time
 		
 		if 0:
 			stats = [(v, k) for k, v in cachingStats.items()]
