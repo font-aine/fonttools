@@ -509,7 +509,7 @@ class TableStack:
 		else:
 			assert table[name] == value, (table[name], value)
 	def __findTable(self, name):
-		for table in self.stack:
+		for table in reversed(self.stack):
 			if table.has_key(name):
 				return table
 		raise KeyError, name
