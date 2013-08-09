@@ -49,7 +49,7 @@ usage: ttx [options] inputfile1 [... inputfileN]
             * export each row as binary in an ASCII art style
          -z extfile
             * export the data as external files with XML refences
-			 If no export format is specified 'raw' format is used.
+       If no export format is specified 'raw' format is used.
     -e Don't ignore decompilation errors, but show a full traceback
        and abort.
     -y <number> Select font number for TrueType Collection,
